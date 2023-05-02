@@ -5,7 +5,7 @@ Dans un contexte GitHub, il s'agit de définir les bonnes pratiques en terme d'o
 ## Création d'une organisation
 
 ### Teams
-Les types de Teams sont définis au niveau organisationnel afin des modes de fonctionnement cohérent.  
+Les types de Teams sont définis au niveau organisationnel afin d'avoir des modes de fonctionnement cohérent.  
 
 | Type | Rôles |
 |------|-------|
