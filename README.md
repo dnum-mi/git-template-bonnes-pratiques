@@ -18,9 +18,9 @@ Sous la Team "Developer" on peut décliner en Team Developer Front, Team Develop
 ### Protection Branches
 Cocher les cases pour protéger la branche main
 
-[x] Require a pull request before merging
-[x] Require approvals
-[x] Require approval of the most recent reviewable push
-[x] Require branches to be up to date before merging
-[x] Require conversation resolution before merging 
-[x] Do not allow bypassing the above settings 
+- [x] Require a pull request before merging
+- [x] Require approvals
+- [x] Require approval of the most recent reviewable push
+- [x] Require branches to be up to date before merging
+- [x] Require conversation resolution before merging 
+- [x] Do not allow bypassing the above settings 
