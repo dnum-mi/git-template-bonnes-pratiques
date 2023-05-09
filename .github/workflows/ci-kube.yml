@@ -1,0 +1,40 @@
+name: CI-Kube
+on:
+   pull_request: 
+    branches: [main]
+   push: 
+    branches: [main]
+   workflow_dispatch:
+
+jobs:
+  job1:
+    runs-on: ubuntu-latest
+    name: build example and deploy to minikube
+    steps:
+    - uses: actions/checkout@v2
+    - name: Start minikube
+      uses: medyagh/setup-minikube@master
+    - name: Try the cluster !
+      run: kubectl get pods -A
+    - name: Build image
+      run: |
+        export SHELL=/bin/bash
+        eval $(minikube -p minikube docker-env)
+        docker build -f ./Dockerfile -t local/example .
+        echo -n "verifying images:"
+        docker images        
+    - name: Deploy to minikube
+      run: |
+        kubectl apply -f ./k8s/api-rof.yaml
+        kubectl apply -f ./k8s/configmap-api-rof.yaml
+        kubectl apply -f ./k8s/mongo.yaml
+        kubectl apply -f ./k8s/secret-api.yaml
+        kubectl apply -f ./k8s/secret-mongo-rof.yaml
+    - name: Test service URLs
+      run: |
+        minikube service list
+        minikube service api-rof --url
+        kubectl get svc -A
+        kubectl get pods -A
+        echo "------------------opening the service------------------"
+        curl --verbose $(minikube service api-rof --url)    
