@@ -50,6 +50,5 @@ RUN rm -rf /usr/share/nginx/html/*
 
 COPY --from=build /git-template-test/build /usr/share/nginx/html
 
-CMD /bin/bash -c "envsubst '\$PORT' < /etc/nginx/nginx.conf > /etc/nginx/nginx.conf" && nginx -g 'daemon off;'
-#CMD ["nginx", "-g", "daemon off;"]
+CMD ["nginx", "-g", "daemon off;"]
 
