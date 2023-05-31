@@ -49,5 +49,6 @@ RUN rm -rf /usr/share/nginx/html/*
 
 COPY --from=build /git-template-test/build /usr/share/nginx/html
 
+
 ENTRYPOINT ["nginx", "-g", "daemon off;"]
 
