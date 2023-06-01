@@ -12,6 +12,6 @@ jobs:
     - name: Build and push Docker image        
       uses: docker/build-push-action@v4        
       with:          
-        context: ./learningithub          
+        context: ./learngithub          
         push: false          
         tags: your-dockerhub-username/your-image-name:latest
