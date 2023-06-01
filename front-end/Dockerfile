@@ -33,7 +33,7 @@ RUN npm install
 # Set the env to "production"
 
 ENV NODE_ENV production
-ENV PORT ${PORT}
+ENV PORT 8080
 
 # Build the app
 RUN npm run build
