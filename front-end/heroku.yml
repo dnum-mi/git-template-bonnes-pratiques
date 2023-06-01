@@ -1,0 +1,11 @@
+setup:
+  config:
+    PORT: 8080
+build:
+  config:
+    PORT: 8080
+  docker:
+    release:
+       dockerfile: Dockerfile
+       target: build
+    web: Dockerfile
