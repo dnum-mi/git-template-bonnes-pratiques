@@ -39,8 +39,9 @@ ENV PORT 8080
 RUN npm run build
 # ==== RUN =======
 
-FROM nginx:alpine
+FROM nginx:alpine as deploy
 
+COPY ./nginx/default.conf.template /etc/nginx/conf.d/default.conf.template
 COPY ./nginx/nginx.conf /etc/nginx/nginx.conf
 
 ## Remove default nginx index page
@@ -50,3 +51,4 @@ COPY --from=build /git-template-test/build /usr/share/nginx/html
 
 #CMD ["nginx", "-g", "daemon off;"]
 
+CMD /bin/bash -c "envsubst '\$PORT' < /etc/nginx/conf.d/default.conf.template > /etc/nginx/conf.d/default.conf" && nginx -g 'daemon off;'
