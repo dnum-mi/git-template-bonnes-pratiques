@@ -39,7 +39,7 @@ ENV PORT 8080
 RUN npm run build
 # ==== RUN =======
 
-FROM nginx:alpine as deploy
+FROM nginx:1.23.3 as deploy
 
 COPY ./nginx/default.conf.template /etc/nginx/conf.d/default.conf.template
 COPY ./nginx/nginx.conf /etc/nginx/nginx.conf
