@@ -41,6 +41,8 @@ RUN npm run build
 
 FROM nginx:1.23.3 as deploy
 
+ENV PORT=8080
+
 COPY ./nginx/default.conf.template /etc/nginx/conf.d/default.conf.template
 COPY ./nginx/nginx.conf /etc/nginx/nginx.conf
 
