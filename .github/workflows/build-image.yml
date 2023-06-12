@@ -24,18 +24,18 @@ jobs:
     - name: Upload artifact back-end
       uses: actions/upload-artifact@v3
       with:
-        name: sample-image-back-end:v1
+        name: sample-image-back-end
         path: /tmp/sample-image-back-end-v1.tar
     - name: Build and push Docker image front-end        
       uses: docker/build-push-action@v4        
       with:          
         context: ./front-end          
         push: false          
-        tags: sample-image-back-end:v1
+        tags: sample-image-front-end:v1
         outputs: type=docker,dest=/tmp/sample-image-front-end-v1.tar
         
     - name: Upload artifact front-end
       uses: actions/upload-artifact@v3
       with:
-        name: sample-image-front-end:v1
+        name: sample-image-front-end
         path: /tmp/sample-image-front-end-v1.tar
