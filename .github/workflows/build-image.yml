@@ -1,4 +1,4 @@
-name: Build and push Docker image Back-End
+name: Build and push Docker image Back-End and Front-end
 on:  
   push:    
     branches:      
@@ -9,6 +9,10 @@ jobs:
     steps:      
     - name: Checkout code        
       uses: actions/checkout@v2      
+      
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v2
+      
     - name: Build and push Docker image back-end        
       uses: docker/build-push-action@v4        
       with:          
@@ -16,6 +20,7 @@ jobs:
         push: false          
         tags: sample-image-back-end:v1
         outputs: type=docker,dest=/tmp/sample-image-back-end-v1.tar
+        
     - name: Upload artifact back-end
       uses: actions/upload-artifact@v3
       with:
@@ -28,6 +33,7 @@ jobs:
         push: false          
         tags: sample-image-back-end:v1
         outputs: type=docker,dest=/tmp/sample-image-front-end-v1.tar
+        
     - name: Upload artifact front-end
       uses: actions/upload-artifact@v3
       with:
