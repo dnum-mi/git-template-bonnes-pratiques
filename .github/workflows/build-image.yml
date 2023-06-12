@@ -9,9 +9,27 @@ jobs:
     steps:      
     - name: Checkout code        
       uses: actions/checkout@v2      
-    - name: Build and push Docker image        
+    - name: Build and push Docker image back-end        
       uses: docker/build-push-action@v4        
       with:          
         context: ./learngithub          
         push: false          
-        tags: your-dockerhub-username/your-image-name:latest
+        tags: sample-image-back-end:v1
+        outputs: type=docker,dest=/tmp/sample-image-back-end-v1.tar
+    - name: Upload artifact back-end
+      uses: actions/upload-artifact@v3
+      with:
+        name: sample-image-back-end:v1
+        path: /tmp/sample-image-back-end-v1.tar
+    - name: Build and push Docker image front-end        
+      uses: docker/build-push-action@v4        
+      with:          
+        context: ./front-end          
+        push: false          
+        tags: sample-image-back-end:v1
+        outputs: type=docker,dest=/tmp/sample-image-front-end-v1.tar
+    - name: Upload artifact front-end
+      uses: actions/upload-artifact@v3
+      with:
+        name: sample-image-front-end:v1
+        path: /tmp/sample-image-front-end-v1.tar
