@@ -1,8 +1,6 @@
 name: CI-Kube
 on:
-   pull_request: 
-    branches: [main]
-   push: 
+   workflow_dispatch:
 
 jobs:
   job1:
