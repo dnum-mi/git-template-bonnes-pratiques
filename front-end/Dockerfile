@@ -9,7 +9,7 @@ ARG npm_registry
 ARG no_proxy
 
 # Set the working directory to /app inside the container
-WORKDIR /git-template-test
+WORKDIR /app
 
 # use proxy & private npm registry
 # With internal npm repo (autosigned) disable strict ssl : strict-ssl false
@@ -32,8 +32,8 @@ RUN npm install
 
 # Set the env to "production"
 
-ENV NODE_ENV production
-ENV PORT 8080
+ENV NODE_ENV=production
+ENV PORT=8080
 
 # Build the app
 RUN npm run build
@@ -49,7 +49,7 @@ COPY ./nginx/nginx.conf /etc/nginx/nginx.conf
 ## Remove default nginx index page
 RUN rm -rf /usr/share/nginx/html/*
 
-COPY --from=build /git-template-test/build /usr/share/nginx/html
+COPY --from=build /app/build /usr/share/nginx/html
 
 #CMD ["nginx", "-g", "daemon off;"]
 
