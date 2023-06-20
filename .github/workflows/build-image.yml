@@ -43,7 +43,7 @@ jobs:
         name: sample-image-front-end
         path: /tmp/sample-image-front-end-v1.tar
       
-  use:
+  download-load-image-docker:
     runs-on: ubuntu-latest
     needs: build
     steps:
