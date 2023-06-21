@@ -9,7 +9,7 @@ ARG npm_registry
 ARG no_proxy
 
 # Set the working directory to /app inside the container
-WORKDIR /git-template-test
+WORKDIR /app
 
 # use proxy & private npm registry
 # With internal npm repo (autosigned) disable strict ssl : strict-ssl false
@@ -43,5 +43,5 @@ FROM bitnami/nginx:1.24.0
 # Add a new configuration
 # COPY ./nginx/nginx.conf /opt/bitnami/nginx/conf/server_blocks/my_server_block.conf
 
-COPY --from=build /git-template-test/build /app
+COPY --from=build /app/build /app
 

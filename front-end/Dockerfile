@@ -23,34 +23,31 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo "Europe/Paris" > /etc
     [ -z "$npm_registry" ] || npm config set registry=$npm_registry ; \
     [ -z "$npm_registry" ] || npm config set strict-ssl false
 
+# copy the package.json to install dependencies
+COPY package.json package-lock.json ./
 
 # Copy app files
 COPY . .
+
 # ==== BUILD =====
 # Install dependencies (npm ci makes sure the exact versions in the lockfile gets installed)
 RUN npm install
 
-# Set the env to "production"
-
-ENV NODE_ENV=production
-ENV PORT=8080
-
 # Build the app
-RUN npm run build
+RUN yarn build
+
 # ==== RUN =======
 
-FROM nginx:1.23.3 as deploy
+FROM nginx:1.23.3
 
-ENV PORT=8080
+ENV PORT 8080
 
-COPY ./nginx/default.conf.template /etc/nginx/conf.d/default.conf.template
-COPY ./nginx/nginx.conf /etc/nginx/nginx.conf
+#COPY ./nginx/default.conf.template /etc/nginx/conf.d/default.conf
+#COPY ./nginx/nginx.conf.template /etc/nginx/nginx.conf
 
 ## Remove default nginx index page
 RUN rm -rf /usr/share/nginx/html/*
 
 COPY --from=build /app/build /usr/share/nginx/html
 
-#CMD ["nginx", "-g", "daemon off;"]
-
-CMD /bin/bash -c "envsubst '\$PORT' < /etc/nginx/conf.d/default.conf.template > /etc/nginx/conf.d/default.conf" && nginx -g 'daemon off;'
+CMD ["nginx", "-g", "daemon off;"]
