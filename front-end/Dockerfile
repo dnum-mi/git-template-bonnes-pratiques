@@ -1,7 +1,7 @@
 
 # ==== CONFIGURE =====
 # Use a Node 16 base image
-FROM node:18-alpine as build
+FROM node:18-alpine 
 
 ARG http_proxy
 ARG https_proxy
@@ -31,23 +31,13 @@ COPY . .
 
 # ==== BUILD =====
 # Install dependencies (npm ci makes sure the exact versions in the lockfile gets installed)
-RUN npm install
+
+ENV NODE_ENV=production
+RUN npm ci
 
 # Build the app
-RUN yarn build
+RUN npm run build
 
-# ==== RUN =======
+EXPOSE 3000
 
-FROM nginx:1.23.3
-
-ENV PORT 8080
-
-COPY ./nginx/default.conf.template /etc/nginx/conf.d/default.conf
-#COPY ./nginx/nginx.conf.template /etc/nginx/nginx.conf
-
-## Remove default nginx index page
-RUN rm -rf /usr/share/nginx/html/*
-
-COPY --from=build /app/build /usr/share/nginx/html
-
-CMD ["nginx", "-g", "daemon off;"]
+CMD ["npm","run","start"]
