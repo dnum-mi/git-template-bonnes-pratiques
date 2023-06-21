@@ -42,7 +42,7 @@ FROM nginx:1.23.3
 
 ENV PORT 8080
 
-#COPY ./nginx/default.conf.template /etc/nginx/conf.d/default.conf
+COPY ./nginx/default.conf.template /etc/nginx/conf.d/default.conf
 #COPY ./nginx/nginx.conf.template /etc/nginx/nginx.conf
 
 ## Remove default nginx index page
