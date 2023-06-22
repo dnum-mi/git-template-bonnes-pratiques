@@ -7,5 +7,4 @@ build:
   docker:
     release:
        dockerfile: Dockerfile
-       target: build
     web: Dockerfile
