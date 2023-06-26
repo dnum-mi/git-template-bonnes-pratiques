@@ -5,7 +5,8 @@ name: Deploy to heroku.
 on:
   push:
     branches: 
-    - init-pipeline
+    - '**'
+    - '!main'
   pull_request:
     branches:
       - main
