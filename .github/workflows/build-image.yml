@@ -73,7 +73,7 @@ jobs:
         uses: docker/login-action@v2
         with:
             username: ${{ secrets.DOCKERHUB_USER }}
-            password: ${{ secrets.DOCKERHUB_PASSWORD }}
+            password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Docker import image
         run: docker import /tmp/sample-image-front-end-v1.tar --tag mogador26/sample-image-front-end:$(date +%s)
