@@ -76,6 +76,9 @@ jobs:
             password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Docker import image
-        run: docker import /tmp/sample-image-front-end-v1.tar mogador26/sample-image-front-end:$(date +%s)
+        run: |
+          docker load --input /tmp/sample-image-front-end-v1.tar
+          docker image tag sample-image-front-end mogador26/sample-image-front-end:v1
+          docker image push mogador26/sample-image-front-end:v1
               
      
