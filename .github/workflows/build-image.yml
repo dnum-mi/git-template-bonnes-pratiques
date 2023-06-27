@@ -78,7 +78,7 @@ jobs:
       - name: Docker import image
         run: |
           docker load --input /tmp/sample-image-front-end-v1.tar
-          docker image tag sample-image-front-end mogador26/sample-image-front-end:v1
-          docker image push mogador26/sample-image-front-end:v1
+          docker image tag sample-image-front-end https://index.docker.io/v1/mogador26/sample-image-front-end:v1
+          docker image push https://index.docker.io/v1/mogador26/sample-image-front-end:v1
               
      
